@@ -7,7 +7,6 @@ import {
     Default,
     DeletedAt,
     ForeignKey,
-    HasMany,
     Length,
     Model,
     PrimaryKey,
@@ -15,17 +14,25 @@ import {
     Unique,
     UpdatedAt,
 } from "sequelize-typescript";
-import Card from "./CardModel";
-import People from "./PeopleModel";
+import Account from "./AccountModel";
 
 @Table({
-    tableName: "account",
+    tableName: "card",
 })
-class Account extends Model {
+class Card extends Model {
     @Default(DataType.UUIDV4)
     @PrimaryKey
     @Column({ type: DataType.UUID })
     id!: string;
+
+    @AllowNull(false)
+    @Column({ type: DataType.ENUM("physical", "virtual") })
+    type!: string;
+
+    @AllowNull(false)
+    @Unique
+    @Column
+    number!: string;
 
     @Length({
         min: 3,
@@ -33,23 +40,7 @@ class Account extends Model {
     })
     @AllowNull(false)
     @Column
-    branch!: string;
-
-    @Length({
-        min: 9,
-        max: 9,
-    })
-    @AllowNull(false)
-    @Unique
-    @Column
-    account!: string;
-
-    @AllowNull(false)
-    @Column({ type: DataType.DECIMAL })
-    balance!: number;
-
-    @HasMany(() => Card)
-    cards!: Card[];
+    cvv!: string;
 
     @CreatedAt
     createdAt!: Date;
@@ -60,12 +51,16 @@ class Account extends Model {
     @DeletedAt
     deletedAt!: Date;
 
-    @ForeignKey(() => People)
+    @ForeignKey(() => Account)
     @Column({ type: DataType.UUID })
-    personId!: string;
+    accountId!: string;
 
-    @BelongsTo(() => People)
-    person!: People;
+    @BelongsTo(() => Account)
+    account!: Account;
+
+    public getTableName() {
+        return "card";
+    }
 }
 
-export default Account;
+export default Card;

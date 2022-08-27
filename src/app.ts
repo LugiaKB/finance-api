@@ -5,11 +5,10 @@ import bodyParser from "body-parser";
 import express, { Application, Request } from "express";
 
 //in file
-import { ErrorHandler } from "./api/middlewares/ErrorMiddleware";
-import router from "./api/routes";
+import { ErrorHandler } from "./app/api/middlewares/ErrorMiddleware";
+import router from "./app/api/routes";
 import { InvalidRouteError } from "./shared/errors";
-import process from "process";
-import { connectDatabase } from "./database";
+import { connectDatabase } from "./app/database";
 
 const app: Application = express();
 const port: number = 2500;
@@ -18,11 +17,11 @@ app.use(bodyParser.json());
 app.use("/", router);
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
 app.use("*", (req: Request) => {
-  throw new InvalidRouteError(req.baseUrl, req.method);
+    throw new InvalidRouteError(req.baseUrl, req.method);
 });
 
 app.use(ErrorHandler);

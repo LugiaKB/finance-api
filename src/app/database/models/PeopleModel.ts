@@ -1,12 +1,11 @@
 import {
     AllowNull,
-    BelongsTo,
     Column,
     CreatedAt,
     DataType,
     Default,
     DeletedAt,
-    ForeignKey,
+    HasMany,
     Length,
     Model,
     PrimaryKey,
@@ -15,32 +14,35 @@ import {
     UpdatedAt,
 } from "sequelize-typescript";
 import Account from "./AccountModel";
+import Card from "./CardModel";
 
 @Table({
-    tableName: "card",
+    tableName: "people",
 })
-class Card extends Model {
+class People extends Model {
     @Default(DataType.UUIDV4)
     @PrimaryKey
     @Column({ type: DataType.UUID })
     id!: string;
 
-    @AllowNull(false)
-    @Column({ type: DataType.ENUM("physical", "virtual") })
-    type!: string;
-
-    @AllowNull(false)
     @Unique
+    @AllowNull(false)
     @Column
-    number!: string;
+    name!: string;
 
     @Length({
-        min: 3,
-        max: 3,
+        min: 11,
+        max: 14,
     })
+    @Unique
     @AllowNull(false)
     @Column
-    cvv!: string;
+    document!: string;
+
+    @Length({ max: 60 })
+    @AllowNull(false)
+    @Column
+    password!: string;
 
     @CreatedAt
     createdAt!: Date;
@@ -51,12 +53,8 @@ class Card extends Model {
     @DeletedAt
     deletedAt!: Date;
 
-    @ForeignKey(() => Account)
-    @Column({ type: DataType.UUID })
-    accountId!: string;
-
-    @BelongsTo(() => Account)
-    account!: Account;
+    @HasMany(() => Account)
+    accounts!: Account[];
 }
 
-export default Card;
+export default People;
