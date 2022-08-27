@@ -8,4 +8,5 @@ export interface AccountOutput {
     branch: string;
     account: string;
     createdAt: Date;
+    updatedAt: Date;
 }

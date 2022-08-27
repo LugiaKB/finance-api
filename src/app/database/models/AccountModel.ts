@@ -44,7 +44,7 @@ class Account extends Model {
     @Column
     account!: string;
 
-    @AllowNull(false)
+    @Default(0)
     @Column({ type: DataType.DECIMAL })
     balance!: number;
 
@@ -66,10 +66,6 @@ class Account extends Model {
 
     @BelongsTo(() => People)
     person!: People;
-
-    public getTableName() {
-        return "account";
-    }
 }
 
 export default Account;
