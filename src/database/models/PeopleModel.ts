@@ -1,4 +1,3 @@
-import { PeopleInput, PeopleOutput } from "@/shared/types/People";
 import {
   AllowNull,
   Column,
@@ -6,6 +5,7 @@ import {
   DataType,
   Default,
   DeletedAt,
+  HasMany,
   Length,
   Model,
   PrimaryKey,
@@ -13,6 +13,7 @@ import {
   Unique,
   UpdatedAt,
 } from "sequelize-typescript";
+import Account from "./AccountModel";
 
 @Table({
   tableName: "people",
@@ -45,6 +46,9 @@ class People extends Model {
 
   @DeletedAt
   deletedAt!: Date;
+
+  @HasMany(() => Account)
+  accounts!: Account[];
 }
 
 export default People;
