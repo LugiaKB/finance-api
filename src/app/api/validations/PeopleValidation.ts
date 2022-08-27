@@ -1,9 +1,12 @@
 import { celebrate, Joi, Segments } from "celebrate";
+import validator from "cpf-cnpj-validator";
+
+const joi = Joi.extend(validator);
 
 export const PeopleValidation = celebrate({
-    [Segments.BODY]: Joi.object().keys({
-        name: Joi.string(),
-        document: Joi.string().min(11).max(14),
-        password: Joi.string(),
+    [Segments.BODY]: joi.object().keys({
+        name: joi.string(),
+        document: joi.alternatives().try(joi.document().cpf(), joi.document().cnpj()),
+        password: joi.string(),
     }),
 });

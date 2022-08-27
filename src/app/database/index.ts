@@ -1,6 +1,7 @@
 import { DB_DIALECT, DB_HOST, DB_NAME, DB_PASSWORD, DB_USER } from "@/config/database";
 import { Sequelize } from "sequelize-typescript";
 import * as models from "./models";
+import { Sync } from "./sync";
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
     host: DB_HOST,
@@ -10,6 +11,10 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
     },
     logging: false,
     models: Object.values(models),
+    dialectOptions: {
+        useUTC: false,
+    },
+    timezone: "-03:00",
 });
 
 export const connectDatabase = async () => {
@@ -22,5 +27,5 @@ export const connectDatabase = async () => {
             console.log(`Could not connect to ${DB_DIALECT}: ${error}`);
         });
 
-    await sequelize.sync({ alter: true });
+    await Sync();
 };

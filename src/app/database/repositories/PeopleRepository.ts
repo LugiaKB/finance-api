@@ -1,4 +1,4 @@
-import { PeopleInput, PeopleOutput } from "@/shared/types/People";
+import { PeopleOutput } from "@/shared/types/People";
 import { People } from "../models";
 
 export const create = async (payload: any): Promise<PeopleOutput> => {
