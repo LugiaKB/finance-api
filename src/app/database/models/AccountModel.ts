@@ -15,6 +15,7 @@ import {
     Unique,
     UpdatedAt,
 } from "sequelize-typescript";
+import { HasManyCreateAssociationMixin, HasManyGetAssociationsMixin } from "sequelize/types";
 import Card from "./CardModel";
 import People from "./PeopleModel";
 
@@ -66,6 +67,10 @@ class Account extends Model {
 
     @BelongsTo(() => People)
     person!: People;
+
+    public createCard!: HasManyCreateAssociationMixin<Card, string>;
+
+    public getCards!: HasManyGetAssociationsMixin<Card>;
 }
 
 export default Account;

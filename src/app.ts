@@ -1,5 +1,6 @@
 //libraries
 import "reflect-metadata";
+import "express-async-errors";
 import "dotenv/config";
 import bodyParser from "body-parser";
 import express, { Application, Request } from "express";

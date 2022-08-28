@@ -1,10 +1,10 @@
 import { Router } from "express";
-import CardRouter from "./CardRoute";
+import AccountRouter from "./AccountRoute";
 import PeopleRouter from "./PeopleRoute";
 
 const router = Router();
 
-router.use("/card", CardRouter);
 router.use("/people", PeopleRouter);
+router.use("/accounts", AccountRouter);
 
 export default router;

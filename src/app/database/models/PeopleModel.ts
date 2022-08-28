@@ -58,6 +58,7 @@ class People extends Model {
     accounts!: Account[];
 
     public createAccount!: HasManyCreateAssociationMixin<Account, string>;
+
     public getAccounts!: HasManyGetAssociationsMixin<Account>;
 }
 
