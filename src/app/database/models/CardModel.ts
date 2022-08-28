@@ -57,10 +57,6 @@ class Card extends Model {
 
     @BelongsTo(() => Account)
     account!: Account;
-
-    public getTableName() {
-        return "card";
-    }
 }
 
 export default Card;

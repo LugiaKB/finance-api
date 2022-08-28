@@ -24,7 +24,7 @@ class Transact extends Model {
     id!: string;
 
     @AllowNull(false)
-    @Column({ type: DataType.DECIMAL })
+    @Column({ type: DataType.DECIMAL(10, 2) })
     value!: number;
 
     @Column

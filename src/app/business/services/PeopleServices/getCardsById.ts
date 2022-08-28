@@ -5,17 +5,14 @@ import { query } from "@/shared/types/query";
 import { limitCardDigits } from "@/shared/utils/limitCardDigits";
 
 const getCardsById = async (peopleId: string, pagination: query): Promise<CardDTO> => {
-    let accounts = await repositoryGetAccountsById(peopleId);
+    const accounts = await repositoryGetAccountsById(peopleId, ["id"]);
+    let accountIds: string[] = [];
 
-    let cards: any = [];
+    accounts.map((account) => {
+        accountIds.push(account.id);
+    });
 
-    for (let account of accounts) {
-        let creditCards = await repositoryGetCardsById(account.id, pagination);
-
-        creditCards.map(limitCardDigits);
-
-        cards.push(...creditCards);
-    }
+    const cards = await repositoryGetCardsById(accountIds, pagination);
 
     return await { cards: cards, pagination: pagination };
 };
