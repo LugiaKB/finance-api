@@ -18,6 +18,7 @@ import {
 import { HasManyCreateAssociationMixin, HasManyGetAssociationsMixin } from "sequelize/types";
 import Card from "./CardModel";
 import People from "./PeopleModel";
+import Transact from "./TransactModel";
 
 @Table({
     tableName: "account",
@@ -68,9 +69,16 @@ class Account extends Model {
     @BelongsTo(() => People)
     person!: People;
 
+    @HasMany(() => Transact)
+    transactions!: Transact[];
+
     public createCard!: HasManyCreateAssociationMixin<Card, string>;
 
     public getCards!: HasManyGetAssociationsMixin<Card>;
+
+    public createTransact!: HasManyCreateAssociationMixin<Transact, string>;
+
+    public getTransacts!: HasManyGetAssociationsMixin<Transact>;
 }
 
 export default Account;

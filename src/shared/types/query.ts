@@ -1,4 +1,4 @@
 export interface query {
-    itemsPerPage: number;
-    currentPage: number;
+    itemsPerPage?: number;
+    currentPage?: number;
 }

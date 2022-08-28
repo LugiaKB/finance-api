@@ -1,14 +1,18 @@
+import {
+    serviceCreateCardById,
+    serviceGetAccountByIdWithCards,
+    serviceGetBalanceById,
+} from "@/app/business/services/AccountServices";
 import { Request, Response } from "express";
-import * as accountService from "../../business/services/AccountService";
 
 export const createCard = async (req: Request, res: Response) => {
-    res.send(await accountService.createCard(req.params.accountId, req.body));
+    res.send(await serviceCreateCardById(req.params.accountId, req.body));
 };
 
 export const getAccountWithCards = async (req: Request, res: Response) => {
-    res.send(await accountService.getAccountWithCards(req.params.accountId));
+    res.send(await serviceGetAccountByIdWithCards(req.params.accountId));
 };
 
 export const getBalance = async (req: Request, res: Response) => {
-    res.send(await accountService.getBalance(req.params.accountId));
+    res.send(await serviceGetBalanceById(req.params.accountId));
 };
