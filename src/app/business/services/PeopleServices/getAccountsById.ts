@@ -2,13 +2,7 @@ import { repositoryGetAccountsById } from "@/app/database/repositories/PeopleRep
 import { AccountOutput } from "@/shared/types/Account";
 
 const getAccountsById = async (peopleId: string): Promise<AccountOutput[]> => {
-    let originalAccounts = await repositoryGetAccountsById(peopleId);
-    let accounts: AccountOutput[] = [];
-
-    originalAccounts.map((a) => {
-        const { id, branch, account, createdAt, updatedAt } = a;
-        accounts.push({ id, branch, account, createdAt, updatedAt });
-    });
+    let accounts = await repositoryGetAccountsById(peopleId);
 
     return await accounts;
 };

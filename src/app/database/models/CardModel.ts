@@ -26,7 +26,7 @@ class Card extends Model {
     id!: string;
 
     @AllowNull(false)
-    @Column({ type: DataType.ENUM("physical", "virtual") })
+    @Column
     type!: string;
 
     @AllowNull(false)

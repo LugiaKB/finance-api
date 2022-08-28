@@ -5,7 +5,7 @@ export const Sync = async () => {
     await console.log("Synchronizing tables...");
     await People.sync({ alter: true });
     await Account.sync({ alter: true });
-    await Card.sync();
+    await Card.sync({ alter: true });
     await Transact.sync({ alter: true });
     await console.log("Tables synced successfully.");
 };
