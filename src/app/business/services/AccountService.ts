@@ -1,5 +1,6 @@
 import { AccountOutput } from "@/shared/types/Account";
 import { CardInput, CardOutput } from "@/shared/types/Card";
+import { limitCardDigits } from "@/shared/utils/limitCardDigits";
 import * as accountRepository from "../../database/repositories/AccountRepository";
 
 export const createCard = async (accountId: string, payload: CardInput): Promise<CardOutput> => {
@@ -18,9 +19,15 @@ export const createCard = async (accountId: string, payload: CardInput): Promise
 export const getAccountWithCards = async (accountId: string): Promise<AccountOutput> => {
     let account = await accountRepository.getAccountWithCards(accountId);
 
-    account.cards?.map((v) => {
-        v.number = v.number.slice(v.number.length - 4, v.number.length);
-    });
+    account.cards?.map(limitCardDigits);
 
     return account;
+};
+
+export const getBalance = async (accountId: string): Promise<{ balance: string }> => {
+    const value = await accountRepository.getBalance(accountId);
+
+    let balance = parseFloat(String(value.balance)).toFixed(2);
+
+    return { balance: balance };
 };

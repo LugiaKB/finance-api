@@ -1,5 +1,6 @@
 import { ResourceNotFoundError } from "@/shared/errors";
 import { AccountOutput } from "@/shared/types/Account";
+import { CardOutput } from "@/shared/types/Card";
 import { PeopleOutput } from "@/shared/types/People";
 import { People } from "../models";
 

@@ -12,3 +12,7 @@ export const createAccount = async (req: Request, res: Response) => {
 export const getAccounts = async (req: Request, res: Response) => {
     res.send(await peopleService.getAccounts(req.params.peopleId));
 };
+
+export const getCards = async (req: Request, res: Response) => {
+    res.send(await peopleService.getCards(req.params.peopleId));
+};

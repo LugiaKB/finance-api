@@ -1,4 +1,5 @@
 import { AccountOutputDTO } from "@/app/api/dtos/AccountDTO";
+import { AccountValidation } from "@/app/api/validations/AccountValidation";
 import { PhysicalCardError, ResourceNotFoundError } from "@/shared/errors";
 import { AccountOutput } from "@/shared/types/Account";
 import { CardOutput } from "@/shared/types/Card";
@@ -32,4 +33,12 @@ export const getAccountWithCards = async (id: string): Promise<AccountOutputDTO>
     if (!account) throw new ResourceNotFoundError();
 
     return account;
+};
+
+export const getBalance = async (id: string): Promise<{ balance: number }> => {
+    const account = await Account.findByPk(id);
+
+    if (!account) throw new ResourceNotFoundError();
+
+    return await { balance: account.balance };
 };

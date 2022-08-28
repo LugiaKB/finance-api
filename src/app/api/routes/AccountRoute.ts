@@ -12,5 +12,6 @@ AccountRouter.post(
     accountController.createCard
 );
 AccountRouter.get("/:accountId/cards", accountController.getAccountWithCards);
+AccountRouter.get("/:accountId/balance", accountController.getBalance);
 
 export default AccountRouter;

@@ -9,5 +9,6 @@ const PeopleRouter: Router = Router();
 PeopleRouter.post("/", PeopleMiddleware, PeopleValidation, peopleController.create);
 PeopleRouter.post("/:peopleId/accounts", AccountValidation, peopleController.createAccount);
 PeopleRouter.get("/:peopleId/accounts", peopleController.getAccounts);
+PeopleRouter.get("/:peopleId/cards", peopleController.getCards);
 
 export default PeopleRouter;

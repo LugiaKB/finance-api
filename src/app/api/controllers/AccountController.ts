@@ -8,3 +8,7 @@ export const createCard = async (req: Request, res: Response) => {
 export const getAccountWithCards = async (req: Request, res: Response) => {
     res.send(await accountService.getAccountWithCards(req.params.accountId));
 };
+
+export const getBalance = async (req: Request, res: Response) => {
+    res.send(await accountService.getBalance(req.params.accountId));
+};
